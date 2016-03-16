@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class controll : MonoBehaviour {
     public float RotateSpeed = 3.0f;
     public float MoveSpeed = 3000.0f;
@@ -10,7 +11,7 @@ public class controll : MonoBehaviour {
     private ForceMode mode;
     public GameObject bullet;
     private Transform gun;
-
+    private GameObject shield;
 
 
 
@@ -20,6 +21,7 @@ public class controll : MonoBehaviour {
       rb = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
         gun = gameObject.transform.GetChild(0);
+        shield = this.gameObject.transform.FindChild("Shield").gameObject ;
     }
 
     // Update is called once per frame
@@ -65,7 +67,21 @@ public class controll : MonoBehaviour {
         {
             Shoot();
         }
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            shield.SetActive(true);
+            StartCoroutine(Delete());
+        }
+
+       
     }
+    IEnumerator Delete()
+    {
+        yield return new WaitForSeconds(5);    //Wait 5s
+
+        shield.SetActive(false);
+    }
+
     void Shoot()
     {
             GameObject bulletIns= Instantiate(bullet,gun.position, gun.rotation) as GameObject;
