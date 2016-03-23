@@ -21,7 +21,7 @@ void SpawnEnemy()
 
         GameObject newEnemy= Instantiate(enemy.gameObject, spawnPoint, Quaternion.identity)as GameObject;
         Color color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
-        newEnemy.GetComponent<SpriteRenderer>().color = color;
+        
         newEnemy.transform.parent = transform;
     }
 }

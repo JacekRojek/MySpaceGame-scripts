@@ -6,7 +6,7 @@ public class AsteroidSpawner : MonoBehaviour {
     public Transform player;
     void Start()
     {
-        InvokeRepeating("SpawnEnemy", 1, 3);
+        InvokeRepeating("SpawnEnemy", 1, 10f);
 
     }
 

@@ -6,7 +6,8 @@ public class Shoot : MonoBehaviour {
     public float bulletsPerSecond=1f;
     private Transform player;
     private Rigidbody2D rb;
-    public int force=200;
+    public int speed=200;
+    public float bulletSpeed=10f;
     
     void Start () {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -17,7 +18,7 @@ public class Shoot : MonoBehaviour {
 	
     void Move()
     {
-        Vector3 forceVector = new Vector3(Random.Range(-force, force), Random.Range(-force, force), 0);
+        Vector3 forceVector = new Vector3(Random.Range(-speed, speed), Random.Range(-speed, speed), 0);
         rb.AddForce(forceVector/1000f , ForceMode2D.Impulse);
     }
 	// Update is called once per frame
@@ -29,6 +30,6 @@ public class Shoot : MonoBehaviour {
     void ShootBullet()
     {
         GameObject go = Instantiate(bullet, transform.position, transform.rotation) as GameObject;
-        go.GetComponent<Rigidbody2D>().AddRelativeForce(Vector2.up * 10f);
+        go.GetComponent<Rigidbody2D>().AddRelativeForce(Vector2.up * bulletSpeed);
     }
 }

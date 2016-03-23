@@ -20,7 +20,7 @@ public class PlanetSpawner : MonoBehaviour {
     // instantiate planets at random locations for all avalible sprites. 
     void spawnPlanet()
     {
-        for(int a=0; a <= spriteRenderArray.Length; a++)
+        for(int a=0; a < spriteRenderArray.Length; a++)
         {
             Vector3 spawnPoint = new Vector3(Random.Range(-120, 120), Random.Range(-90, 90), 0);
             GameObject newPlanet = Instantiate(planet, spawnPoint, Quaternion.identity) as GameObject;
