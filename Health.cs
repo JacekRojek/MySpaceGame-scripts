@@ -10,8 +10,12 @@ public class Health : MonoBehaviour {
     public GameObject fuel;
     public GameObject metal;
     public Canvas canvas;
+    //private GameObject XPpanel;
+    //public GameObject XP_Text;
+    public int expVaule=10;
     void Start()
     {
+        //XPpanel = this.transform.Find("/Canvas/Character_Panel/XP_Panel").gameObject;
         health = max_health;
         animator = gameObject.GetComponent<Animator>();
         healtBar = gameObject.transform.FindChild("HP_bar").gameObject;
@@ -48,6 +52,9 @@ public class Health : MonoBehaviour {
 
     void DestroyObject()
     {
+        ExperienceSystem.EXP += expVaule;
+        //GameObject textPanel =Instantiate(XP_Text, transform.position, Quaternion.identity)as GameObject;
+        //textPanel.transform.parent = XPpanel.transform;
             Destroy(gameObject);
     }
   

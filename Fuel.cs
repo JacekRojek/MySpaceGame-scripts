@@ -12,7 +12,7 @@ public class Fuel : MonoBehaviour {
         
         fuel = Mathf.Clamp(fuel, 0, maxFuel);
         fuel = maxFuel;
-        Debug.Log(fuel);
+
 
 	}
 	
