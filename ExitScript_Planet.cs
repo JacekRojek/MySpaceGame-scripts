@@ -5,8 +5,8 @@ public class ExitScript_Planet : MonoBehaviour {
 
 	public void ExitPanel()
     {
-        Debug.Log(Time.timeScale);
+        
         Time.timeScale = 1f;
-        Debug.Log(Time.timeScale);
+        
     }
 }
