@@ -10,13 +10,13 @@ public class ResourceManagment : MonoBehaviour {
     public Text text_Cristalsl;
     // Use this for initialization
     void Start () {
-        text_Fuel.text = "Fuel: \n" + Mathf.RoundToInt(Fuel.fuel).ToString();
+        text_Fuel.text = "Fuel: \n" + Mathf.RoundToInt(Fuel_Production_Building.Totalfuel).ToString();
         text_Metal.text = "Metal \n" + Mathf.RoundToInt(Totalmetal).ToString();
         text_Cristalsl.text = "Cristals \n" + Mathf.RoundToInt(Totalcristals).ToString();
     }
 	
-	// Update is called once per frame
-	void Update () {
-	    
-	}
+	public void AddMetal(int number)
+    {
+        Totalmetal += number;
+    }
 }

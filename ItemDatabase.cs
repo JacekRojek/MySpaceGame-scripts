@@ -7,9 +7,11 @@ using System.IO;
 public class ItemDatabase : MonoBehaviour {
     private List<Item> database = new List<Item>();
     private JsonData itemData;
+
     
     void Start()
     {
+    
         itemData = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/StreamingAssets/Items.json"));
         ConstructItemDatabase();
         Debug.Log(database[1].Title);
@@ -34,6 +36,7 @@ public class ItemDatabase : MonoBehaviour {
 }
 public class Item
 {
+    private Sprite[] sprites = UnityEngine.Resources.LoadAll<Sprite>("Sprites/EQuipment");
     public int ID { get; set; }
     public string Title { get; set; }
     public int Value { get; set; }
@@ -44,6 +47,7 @@ public class Item
     public bool Stackable { get; set; }
     public int Rarity { get; set; }
     public string Slug { get; set; }
+    public Sprite sprite{ get; set;}
 
     public Item(int id,string title,int value,int power, int defence, int vitality, string discription, bool stackable, int rarity, string slug){
         this.ID = id;
@@ -56,6 +60,8 @@ public class Item
         this.Stackable = stackable;
         this.Rarity = rarity;
         this.Slug = slug;
+        this.sprite = sprites[id];
+        
 
 
         }

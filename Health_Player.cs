@@ -4,13 +4,16 @@ using System.Collections;
 
 
 public class Health_Player : MonoBehaviour {
-    public int health = 100;
+    private static int health = 100;
     private Animator animator;
-    public Text textBox;
-    public GameObject panel;
+    private Text textBox;
+    private GameObject panel;
 
     void Start()
     {
+        textBox = this.transform.Find("/Canvas/TextHP").GetComponent<Text>();
+        panel= this.transform.Find("/Canvas/GameOver_Panel").gameObject;
+        panel.SetActive(false);
         panel.SetActive(false);
         animator = gameObject.GetComponent<Animator>();
      

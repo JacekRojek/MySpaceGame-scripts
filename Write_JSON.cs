@@ -5,31 +5,33 @@ using System.IO;
 
 public class Write_JSON : MonoBehaviour {
 
-    public Character player = new Character(0,"player0",1231,false,new int[] { 1, 2, 3 });
-    JsonData playerJson;
+    public State player = new State(0, "Amerath Prime",0, 3,"you found empty planet");
+    JsonData stateJson;
+    
 	// Use this for initialization
 	void Start () {
-        // 
-        playerJson = JsonMapper.ToJson(player);
-        Debug.Log(playerJson);
-        File.WriteAllText(Application.dataPath+"/Player.json",playerJson.ToString());
+        stateJson = JsonMapper.ToJson(player);
+        Debug.Log(stateJson);
+        File.WriteAllText(Application.dataPath+"/Quest.json",stateJson.ToString());
 	}
-	
-
 }
-public class Character
+public class State
 {
     public int id;
     public string name;
-    public int health;
-    public bool isAggresive;
-    public int[] stats;
-    public Character(int id, string name, int health, bool isAggresive, int[] stats)
+    public Sprite sprite;
+    private int state;
+    public int numberOfOptions;
+    public string mainText;
+  //  public int[] stats;
+    public State(int id, string name, int state, int numberOfOptions,string maintext)
     {
         this.id = id;
         this.name = name;
-        this.health = health;
-        this.isAggresive = isAggresive;
-        this.stats = stats;
+        this.sprite = UnityEngine.Resources.Load<Sprite>("Sprites/" + name);
+        this.state = state;
+        this.numberOfOptions = numberOfOptions;
+        this.mainText = maintext;
+
     }
 }

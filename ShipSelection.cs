@@ -9,7 +9,8 @@ public class ShipSelection : MonoBehaviour {
     private string ship_name = "ship_instance";
     private int ship_number = 0;
     private int max_ship_number =0;
-    private bool isUnlocked = false;
+    public GameObject playButton;
+    //private bool isUnlocked = false;
     void Start () {
         
         max_ship_number = ships.Length;
@@ -26,7 +27,9 @@ public class ShipSelection : MonoBehaviour {
 
         if (ship_number > 0)
         {
+            Debug.Log(">0  " + ship_number);
             ship_number--;
+            Debug.Log(">0  " + ship_number);
             INstantiateShip();
             
         }
@@ -41,11 +44,19 @@ public class ShipSelection : MonoBehaviour {
 
     private void INstantiateShip()
     {
-        Debug.Log(ship_number);
         Destroy(placeholder.transform.FindChild(ship_name).gameObject);
         GameObject ship = Instantiate(ships[ship_number], placeholder.transform.position, Quaternion.identity) as GameObject;
-        ship.transform.parent = placeholder.transform;
+        //ship.transform.parent = placeholder.transform;
+        ship.transform.SetParent(placeholder.transform);
         ship.name = ship_name;
+        Debug.Log(ship_number);
+        if (ship.tag=="Unlocked")
+        {
+            playButton.GetComponent<Play_button_SelectionScreen>().Enable();
+        }
+        else {
+            playButton.GetComponent<Play_button_SelectionScreen>().Disable();
+        }
     }
 
     public void selectionRight()
