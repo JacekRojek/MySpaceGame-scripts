@@ -37,7 +37,7 @@ public class AsteroidCollision : MonoBehaviour {
             CheckState();
       
             HP = HP - coll.gameObject.GetComponent<Bullet>().damage;
-            Debug.Log(HP);
+
             Destroy(coll.gameObject);
            
         }
@@ -46,7 +46,7 @@ public class AsteroidCollision : MonoBehaviour {
             CheckState();
 
             HP = HP - coll.gameObject.GetComponent<Bullet_enemie>().damage;
-            Debug.Log(HP);
+
             Destroy(coll.gameObject);
             
         }

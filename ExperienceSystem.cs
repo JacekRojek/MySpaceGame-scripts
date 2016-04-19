@@ -4,28 +4,40 @@ using UnityEngine.UI;
 
 public class ExperienceSystem : MonoBehaviour {
     public static int EXP=0;
-    static int LEVEL=0;
+    public static int LEVEL=1;
     private Slider expSlider;
-    int maxEXP=100;
-	// Use this for initialization
+    int maxEXP=50;
+    public GameObject LevelUP_panel;
+    private Transform canvas;
+     public delegate void LevelUP();
+    public static event LevelUP Leveled;
 	void Start () {
-        
+        canvas = this.transform.Find("/Canvas");
+        Leveled += ShowPanel;
         expSlider = this.transform.Find("/Canvas/Character_Panel/EXP_Slider").gameObject.GetComponent<Slider>();
 
         expSlider.maxValue = maxEXP;
         EXP = Mathf.Clamp(EXP, 0, maxEXP);
     }
 	
-	// Update is called once per frame
+
 	void Update () {
         expSlider.value = EXP;
         if (EXP >= maxEXP)
         {
-            EXP = EXP - maxEXP;
             LEVEL++;
+            EXP = EXP - maxEXP;
             maxEXP = (int)(1.2f*maxEXP);
-            Debug.Log("Level =  " + LEVEL + "  EXp=  " + EXP);
+            expSlider.value = EXP;
+            Leveled();
         }
 	}
+    void ShowPanel()
+    {
+        GameObject panel =Instantiate(LevelUP_panel, transform.position, Quaternion.identity) as GameObject;
+        panel.transform.parent = canvas;
+        panel.transform.localPosition = Vector3.zero;
+        Debug.Log("Panel Created");
+    }
 
 }

@@ -12,11 +12,8 @@ public class controll : MonoBehaviour {
     public GameObject bullet;
     private Transform gun;
     private GameObject shield;
-
-
-
-
-
+    public GameObject shockwave;
+   
     void Start () {
       rb = gameObject.GetComponent<Rigidbody2D>();
         animator = gameObject.GetComponent<Animator>();
@@ -27,6 +24,7 @@ public class controll : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        
         Move();
     }
 
@@ -72,8 +70,11 @@ public class controll : MonoBehaviour {
             shield.SetActive(true);
             StartCoroutine(Delete());
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Shockwave();
+        }
 
-       
     }
     IEnumerator Delete()
     {
@@ -87,15 +88,17 @@ public class controll : MonoBehaviour {
             GameObject bulletIns= Instantiate(bullet,gun.position, gun.rotation) as GameObject;
             bulletIns.GetComponent<Rigidbody2D>().AddForce(transform.up *  BulletSpeed , ForceMode2D.Force); 
     }
-
-    void FixedUpdate ()
+    void Shockwave()
     {
-           // float moveHorizontal = Input.GetAxis("Horizontal");
-           // float moveVertical = Input.GetAxis("Vertical");
+        
+        GameObject newShockvawe = Instantiate(shockwave, this.transform.position, Quaternion.identity) as GameObject;
+        newShockvawe.transform.SetParent(this.transform);
+        newShockvawe.transform.localScale = Vector2.Lerp(new Vector2(0f, 0f), new Vector2(10f, 10f), Time.deltaTime);
+        Destroy(newShockvawe, 5f);
+        
+    }
 
-           // Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-
-        }
+ 
     }
 
 
